@@ -20,7 +20,7 @@ app.event("message", async ({ event, say }) => {
     const option = text.split(".랜덤 ")[1];
     if (/\d+분/.test(option)) {
       const optionTime = option.split("분")[0];
-      const filteredMenus = menus.filter((menu) => menu.time <= optionTime);
+      const filteredMenus = menus.filter((menu) => menu.time < optionTime);
       const menuIndex = Math.floor(Math.random() * filteredMenus.length);
       const selectedMenu = filteredMenus[menuIndex];
 
@@ -37,7 +37,9 @@ app.event("message", async ({ event, say }) => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${selectedMenu.time}분`,
+              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${
+                selectedMenu.time + 1
+              }분`,
             },
           },
         ],
@@ -59,7 +61,9 @@ app.event("message", async ({ event, say }) => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${selectedMenu.time}분`,
+              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${
+                selectedMenu.time + 1
+              }분`,
             },
           },
         ],
