@@ -71,11 +71,14 @@ app.event("message", async ({ event, say }) => {
       say(message);
     }
   } else if (text.startsWith(".사다리")) {
-    const excludeMembers = text.split("사다리 ")[1].split("/");
+    const option = text.split("사다리 ")[1];
+    const excludeMembers = option
+      ?.split("/")
+      .filter((member) => members.includes(member));
 
     const groups = [[], [], []];
     const shuffledNames = members
-      .filter((member) => !excludeMembers.includes(member))
+      .filter((member) => !excludeMembers?.includes(member))
       .sort(() => Math.random() - 0.5);
     for (let i = 0; i < shuffledNames.length; i++) {
       groups[i % 3].push(shuffledNames[i]);
@@ -95,8 +98,8 @@ app.event("message", async ({ event, say }) => {
           type: "context",
           elements: [
             {
-              text: `*${getDateText()}*  |  휴가자 ${
-                excludeMembers.length ? "- " + excludeMembers.join(", ") : "X"
+              text: `*${getDateText()}*  |  미참석 ${
+                excludeMembers?.length ? "- " + excludeMembers.join(", ") : "X"
               }`,
               type: "mrkdwn",
             },
