@@ -1,14 +1,10 @@
 const { App } = require("@slack/bolt");
 const dotenv = require("dotenv");
 
-dotenv.config();
+const { menus, members } = require("./const.js");
+const { getDateText } = require("./utils.js");
 
-console.log({
-  token: process.env.BOT_TOKEN,
-  signingSecret: process.env.SIGNING_SECRET,
-  socketMode: true,
-  appToken: process.env.APP_TOKEN,
-});
+dotenv.config();
 
 const app = new App({
   token: process.env.BOT_TOKEN,
@@ -17,86 +13,146 @@ const app = new App({
   appToken: process.env.APP_TOKEN,
 });
 
-const menus = [
-  { store: "가람 부대찌개" },
-  { store: "강강술래" },
-  { store: "고갯마루" },
-  { store: "그윽 떡볶이" },
-  { store: "그옛날손짜장" },
-  { store: "남도구들" },
-  { store: "나이스샤워" },
-  { store: "내가왕이라면" },
-  { store: "네모징어" },
-  { store: "닭갈비두목" },
-  { store: "담소" },
-  { store: "대게마을" },
-  { store: "돝고기" },
-  { store: "돈까스해" },
-  { store: "마포만두" },
-  { store: "만월" },
-  { store: "바스버거" },
-  { store: "쁘라텟타이" },
-  { store: "비비큐" },
-  { store: "사보텐" },
-  { store: "삼식이 감자탕" },
-  { store: "세겹" },
-  { store: "수미초밥" },
-  { store: "안기덮밥마라탕" },
-  { store: "오사무식당" },
-  { store: "온미반" },
-  { store: "원당골" },
-  { store: "웨이웨이" },
-  { store: "육시리" },
-  { store: "이태리 부대찌개" },
-  { store: "이화수 전통육개장" },
-  { store: "일미집" },
-  { store: "짬뽕지존" },
-  { store: "조선파스타" },
-  { store: "진궁" },
-  { store: "차알" },
-  { store: "천하돈까스" },
-  { store: "청담막식당" },
-  { store: "타코벨" },
-  { store: "텐핑거" },
-  { store: "파이어벨" },
-  { store: "핑크솔" },
-  { store: "하노이스토리" },
-  { store: "호천당" },
-  { store: "홍낭자와 김도령" },
-  { store: "홍수계찜닭" },
-  { store: "후라토 식당" },
-  { store: "Chai797" },
-];
+app.event("message", async ({ event, say }) => {
+  const text = event.text;
 
-const members = [
-  "켄",
-  "에디",
-  "카이트",
-  "노아",
-  "존",
-  "데이브",
-  "샐리",
-  "스카이",
-  "주디",
-  "히나",
-];
+  if (text.startsWith(".랜덤")) {
+    const option = text.split(".랜덤 ")[1];
+    if (/\d+분/.test(option)) {
+      const optionTime = option.split("분")[0];
+      const filteredMenus = menus.filter((menu) => menu.time <= optionTime);
+      const menuIndex = Math.floor(Math.random() * filteredMenus.length);
+      const selectedMenu = filteredMenus[menuIndex];
 
-app.message(".랜덤메뉴", ({ _, say }) => {
-  const menuIndex = Math.floor(Math.random() * menus.length);
-  say(menus[menuIndex].store);
-});
+      const message = {
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: selectedMenu.store,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${selectedMenu.time}분`,
+            },
+          },
+        ],
+      };
+      say(message);
+    } else {
+      const menuIndex = Math.floor(Math.random() * menus.length);
+      const selectedMenu = menus[menuIndex];
+      const message = {
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: selectedMenu.store,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*거리:* ${selectedMenu.distance}m  *예상소요시간:* ${selectedMenu.time}분`,
+            },
+          },
+        ],
+      };
+      say(message);
+    }
+  } else if (text.startsWith(".사다리")) {
+    const excludeMembers = text.split("사다리 ")[1].split("/");
 
-app.message(".사다리", ({ _, say }) => {
-  const groups = [[], [], []];
-  const shuffledNames = members.sort(() => Math.random() - 0.5);
-  for (let i = 0; i < shuffledNames.length; i++) {
-    groups[i % 3].push(shuffledNames[i]);
+    const groups = [[], [], []];
+    const shuffledNames = members
+      .filter((member) => !excludeMembers.includes(member))
+      .sort(() => Math.random() - 0.5);
+    for (let i = 0; i < shuffledNames.length; i++) {
+      groups[i % 3].push(shuffledNames[i]);
+    }
+
+    const message = {
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: `:ladder: 점심 사다리 :ladder:`,
+            emoji: true,
+          },
+        },
+        {
+          type: "context",
+          elements: [
+            {
+              text: `*${getDateText()}*  |  휴가자 X`,
+              type: "mrkdwn",
+            },
+          ],
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text:
+              "*1조 :* " +
+              `${groups[0].join(", ")}\n` +
+              "*2조 :* " +
+              `${groups[1].join(", ")}\n` +
+              "*3조 :* " +
+              `${groups[2].join(", ")}\n`,
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "context",
+          elements: [
+            {
+              type: "mrkdwn",
+              text: ":pushpin: 버그 제보 및 기능 요청은 *Dave* 에게 문의해주세요. | 다른 명령어 보기 👉 `.명령어`",
+            },
+          ],
+        },
+      ],
+    };
+
+    say(message);
+  } else if (text === ".명령어") {
+    const message = {
+      blocks: [
+        {
+          type: "section",
+          text: {
+            text: "[주변 식당]\n`.랜덤` - 근처 식당을 랜덤하게 추천\n`.랜덤 ${n}분` - n분 이내 식당을 랜덤하게 추천 (ex. `.랜덤 3분`)",
+            type: "mrkdwn",
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            text: "[사다리 타기]\n`.사다리`\n- 서비스개발팀 사다리 타기\n`.사다리 ${닉네임}/${닉네임}`\n- 미참석자 제외 사다리 타기 (ex `.사다리 데이브`, `.사다리 데이브/샐리`)",
+            type: "mrkdwn",
+          },
+        },
+      ],
+    };
+
+    say(message);
   }
-
-  const message = `1조: ${groups[0].join(", ")}\n2조: ${groups[1].join(
-    ", "
-  )}\n3조: ${groups[2].join(", ")}`;
-  say(message);
 });
 
 // Start your app
