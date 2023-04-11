@@ -95,7 +95,9 @@ app.event("message", async ({ event, say }) => {
           type: "context",
           elements: [
             {
-              text: `*${getDateText()}*  |  휴가자 X`,
+              text: `*${getDateText()}*  |  휴가자 ${
+                excludeMembers.length ? "- " + excludeMembers.join(", ") : "X"
+              }`,
               type: "mrkdwn",
             },
           ],
