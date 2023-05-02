@@ -1,4 +1,4 @@
-const { stores, members } = require("./const.js");
+const { stores, members, errorMessage } = require("./const.js");
 
 const dayText = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -73,72 +73,80 @@ const sendRandomStore = (text, say) => {
 
 // .사다리
 const sendRandomLadder = (text, say) => {
-  const option = text.split("사다리 ")[1];
-  const excludeMembers = option
-    ?.split("/")
-    .filter((member) => members.includes(member));
+  try {
+    const option = text.split("사다리 ")[1];
+    const groupCount = option && /2/.test(option) ? 2 : 3;
+    const filteredOption =
+      groupCount === 3 ? option : option.replaceAll(" ", "").replace(/\d/g, "");
+    const excludeMembers = filteredOption
+      ?.split("/")
+      .filter((member) => members.includes(member));
 
-  const groups = [[], [], []];
-  const shuffledNames = members
-    .filter((member) => !excludeMembers?.includes(member))
-    .sort(() => Math.random() - 0.5);
-  for (let i = 0; i < shuffledNames.length; i++) {
-    groups[i % 3].push(shuffledNames[i]);
+    const filteredMembers = members.filter(
+      (member) => !excludeMembers?.includes(member)
+    );
+    const filteredMembersLength = filteredMembers.length;
+    const groups = groupCount === 3 ? [[], [], []] : [[], []];
+
+    for (let i = 0; i < filteredMembersLength; i++) {
+      const randomIdx = Math.floor(Math.random() * filteredMembers.length);
+
+      groups[i % groupCount].push(filteredMembers[randomIdx]);
+      filteredMembers.splice(randomIdx, 1);
+    }
+
+    const message = {
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: `:ladder: 점심 사다리 :ladder:`,
+            emoji: true,
+          },
+        },
+        {
+          type: "context",
+          elements: [
+            {
+              text: `*${getDateText()}*  |  미참석 ${
+                excludeMembers?.length ? "- " + excludeMembers.join(", ") : "X"
+              }`,
+              type: "mrkdwn",
+            },
+          ],
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: groups
+              .map((group, index) => `*${index + 1}조 :* ${group.join(", ")}`)
+              .join("\n"),
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "context",
+          elements: [
+            {
+              type: "mrkdwn",
+              text: ":pushpin: 버그 제보 및 기능 요청은 *Dave* 에게 문의해주세요. | 다른 명령어 보기 👉 `.명령어`",
+            },
+          ],
+        },
+      ],
+    };
+
+    say(message);
+  } catch (e) {
+    say(errorMessage);
   }
-
-  const message = {
-    blocks: [
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: `:ladder: 점심 사다리 :ladder:`,
-          emoji: true,
-        },
-      },
-      {
-        type: "context",
-        elements: [
-          {
-            text: `*${getDateText()}*  |  미참석 ${
-              excludeMembers?.length ? "- " + excludeMembers.join(", ") : "X"
-            }`,
-            type: "mrkdwn",
-          },
-        ],
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text:
-            "*1조 :* " +
-            `${groups[0].join(", ")}\n` +
-            "*2조 :* " +
-            `${groups[1].join(", ")}\n` +
-            "*3조 :* " +
-            `${groups[2].join(", ")}\n`,
-        },
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "context",
-        elements: [
-          {
-            type: "mrkdwn",
-            text: ":pushpin: 버그 제보 및 기능 요청은 *Dave* 에게 문의해주세요. | 다른 명령어 보기 👉 `.명령어`",
-          },
-        ],
-      },
-    ],
-  };
-
-  say(message);
 };
 
 // .목록

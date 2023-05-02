@@ -1556,12 +1556,30 @@ const stores = [
     time: 2,
     category: "한식",
     foods: ["삼겹살", "고추장불고기", "김치찌개"],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
+    menus: [
+      {
+        name: "매운맛갈비찜",
+        price: 9000,
+      },
+      {
+        name: "고추장불고기",
+        price: 9000,
+      },
+      {
+        name: "김치찌개",
+        price: 9000,
+      },
+      {
+        name: "순두부찌개",
+        price: 9000,
+      },
+    ],
+    url: "https://naver.me/xB4h97lg",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20181106_262/1541470333951sP46I_JPEG/VIQdPXi7xgAnhqx1i8evwbD4.jpg",
+    isRequest: false,
+    x: 127.03755152539699,
+    y: 37.49726368571698,
   },
   {
     name: "오무라안",
@@ -1607,13 +1625,23 @@ const stores = [
     distance: 99,
     time: 0,
     category: "한식",
-    foods: [""],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
+    foods: ["삼겹살"],
+    menus: [
+      {
+        name: "오늘의 메뉴",
+        price: 7000,
+      },
+      {
+        name: "생삼겹살",
+        price: 11000,
+      },
+    ],
+    url: "https://naver.me/FgiSnKS5",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20181106_140/1541471265456Pvkmx_JPEG/rVcWZvAB8BXcl_spkidz_B63.jpg",
+    isRequest: false,
+    x: 127.037841,
+    y: 37.497005,
   },
   {
     name: "웨이웨이",
@@ -1685,13 +1713,31 @@ const stores = [
     distance: 109,
     time: 1,
     category: "감자탕",
-    foods: ["감자탕"],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
+    foods: ["감자탕", "백반"],
+    menus: [
+      {
+        name: "감자탕백반",
+        price: 9000,
+      },
+      {
+        name: "감자탕 소",
+        price: 21000,
+      },
+      {
+        name: "감자탕 중",
+        price: 28000,
+      },
+      {
+        name: "감자탕 대",
+        price: 35000,
+      },
+    ],
+    url: "https://naver.me/xuICKebC",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20200518_159/1589788929262GsNTV_JPEG/YkoaVXXwlxf0CAN5Ic8CKIXe.jpg",
+    isRequest: false,
+    x: 127.03867207580787,
+    y: 37.496580940988515,
   },
   {
     name: "장칼장",
@@ -2577,7 +2623,11 @@ const 명령어 = {
 const errorMessage = {
   blocks: [
     {
-      type: "",
+      type: "section",
+      text: {
+        text: "잘못된 명령어입니다.",
+        type: "mrkdwn",
+      },
     },
   ],
 };
@@ -2587,4 +2637,5 @@ module.exports = {
   cafes,
   members,
   명령어,
+  errorMessage,
 };
