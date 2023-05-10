@@ -338,7 +338,9 @@ const sendStoreInfo = (store, say) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `*거리:* ${store.distance}m  *예상소요시간:* ${store.time}분`,
+            text: `*거리:* ${store.distance}m  *예상소요시간:* ${
+              store.time + 1
+            }분`,
           },
           accessory: {
             type: "button",
