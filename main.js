@@ -21,7 +21,6 @@ const app = new App({
 
 app.event("message", async ({ event, say }) => {
   const text = event.text;
-  console.log("text:", text);
 
   if (text.startsWith(".랜덤")) {
     sendRandomStore(text, say);

@@ -553,6 +553,41 @@ const stores = [
     y: 37.49885757783401,
   },
   {
+    name: "다돈식당",
+    distance: 458,
+    time: 6,
+    category: "육류",
+    foods: ["돈까스", "삼겹살"],
+    menus: [
+      {
+        name: "상로스까스",
+        price: 11500,
+      },
+      {
+        name: "로스까스",
+        price: 9500,
+      },
+      {
+        name: "히레까스",
+        price: 10500,
+      },
+      {
+        name: "삼겹살160g",
+        price: 16000,
+      },
+      {
+        name: "특목살160g",
+        price: 16000,
+      },
+    ],
+    url: "https://naver.me/FqHJsH2I",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20230305_10/1678021902525rKEza_JPEG/1678021010150.jpg",
+    isRequest: false,
+    x: 127.03748917062886,
+    y: 37.49461552366746,
+  },
+  {
     name: "닭갈비두목",
     distance: 201,
     time: 2,
@@ -873,6 +908,37 @@ const stores = [
     y: 37.4999129601121,
   },
   {
+    name: "멘야유메미루",
+    distance: 446,
+    time: 6,
+    category: "일식",
+    foods: ["라멘", "마제소바", "마제메시"],
+    menus: [
+      {
+        name: "마제소바",
+        price: 11000,
+      },
+      {
+        name: "카라이(매운) 마제소바",
+        price: 12000,
+      },
+      {
+        name: "마제메시 (밥)",
+        price: 11000,
+      },
+      {
+        name: "카라이(매운) 마제메시",
+        price: 12000,
+      },
+    ],
+    url: "https://naver.me/5CbCgmTX",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20220114_67/16421214422504n4Q1_JPEG/20220114_095028.jpg",
+    isRequest: false,
+    x: 127.03528785203605,
+    y: 37.49919553342727,
+  },
+  {
     name: "바스버거",
     distance: 388,
     time: 6,
@@ -922,6 +988,29 @@ const stores = [
     isRequest: false,
     x: 127.03577117720009,
     y: 37.499683361291275,
+  },
+  {
+    name: "방아다리",
+    distance: 391,
+    time: 6,
+    category: "칼국수",
+    foods: ["만두"],
+    menus: [
+      {
+        name: "칼국수",
+        price: 7500,
+      },
+      {
+        name: "칼제비",
+        price: 7500,
+      },
+    ],
+    url: "https://naver.me/FBwJbFhy",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20170914_265/1505348555148HcLKj_PNG/7n8y7vhEYfSbsEysoLD_CkNV.png",
+    isRequest: false,
+    x: 127.04065051741132,
+    y: 37.49559464018707,
   },
   {
     name: "부어치킨",
@@ -2575,6 +2664,7 @@ const members = [
   "스카이",
   "주디",
   "히나",
+  "폴",
 ];
 
 const 명령어 = {
