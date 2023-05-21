@@ -2,6 +2,74 @@ const { stores, members, errorMessage } = require("./const.js");
 
 const dayText = ["일", "월", "화", "수", "목", "금", "토"];
 
+const CommandReaderResponse = {
+  RANDOM: "RANDOM",
+  LADDER: "LADDER",
+  HELP: "HELP",
+  LIST: "LIST",
+  ADD: "ADD",
+  ETC: "ETC",
+};
+
+/**
+ * [key]: string[] | {
+ *   commands: string[],
+ *   options?: {
+ *     exact: boolean;
+ *   }
+ * }
+ */
+const commandReaderMap = {
+  RANDOM: [".랜덤"],
+  LADDER: [".사다리"],
+  HELP: {
+    commands: [".명령어", ".help"],
+    options: {
+      exact: true,
+    },
+  },
+  LIST: [".목록"],
+  ADD: [".추가"],
+};
+
+const CommandReader = (event) => {
+  const validateAndReturnCommand = (commandText) => {
+    for (const key of Object.keys(commandReaderMap)) {
+      if (commandReaderMap[key].length === undefined) {
+        for (const command of commandReaderMap[key].commands) {
+          if (
+            commandReaderMap[key].options?.exact
+              ? commandText === command
+              : commandText.startsWith(command)
+          ) {
+            return CommandReaderResponse[key];
+          }
+        }
+      } else {
+        for (const command of commandReaderMap[key]) {
+          if (commandText.startsWith(command)) {
+            return CommandReaderResponse[key];
+          }
+        }
+      }
+    }
+
+    return CommandReaderResponse.ETC;
+  };
+
+  const commandReaderObj = new Proxy(event, {
+    get: (obj, prop) => {
+      if (prop === "command") {
+        return validateAndReturnCommand(obj.text);
+      }
+
+      return obj[prop];
+    },
+  });
+
+  return commandReaderObj;
+};
+
 const getDateText = () => {
   const today = new Date();
   const month = today.getMonth();
@@ -427,4 +495,6 @@ module.exports = {
   sendRandomLadder,
   sendStoreList,
   sendStoreInfo,
+  CommandReader,
+  CommandReaderResponse,
 };
