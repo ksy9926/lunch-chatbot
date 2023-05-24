@@ -373,6 +373,7 @@ const sendStoreInfo = (store, say) => {
   }
 };
 
+// .추가
 const addStore = (text, say) => {
   const option = text.split(".추가 ")[1];
 
