@@ -117,14 +117,20 @@ const stores = [
     name: "고끌림",
     distance: 543,
     time: 8,
-    category: "",
-    foods: [""],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
+    category: "육류",
+    foods: ["고기", "소고기", "토시살", "갈비"],
+    menus: [
+      {
+        name: "점심정식 (된장찌개 돼지불백세트?)",
+        price: 9000,
+      },
+    ],
+    url: "https://naver.me/5zoSxEVF",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20230326_296/1679841401984Q3JmR_JPEG/1679841398620.jpg",
+    isRequest: false,
+    x: 127.03380168053761,
+    y: 37.49761772513968,
   },
   {
     name: "그윽 떡볶이",
@@ -403,16 +409,74 @@ const stores = [
   },
   {
     name: "꾸우덕",
-    distance: 0,
-    time: 0,
-    category: "",
-    foods: [""],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
+    distance: 561,
+    time: 8,
+    category: "이탈리아",
+    foods: ["파스타", "리조또", "샐러드", "스테이크"],
+    menus: [
+      {
+        name: "매콤크림파스타",
+        price: 11900,
+      },
+      {
+        name: "미트 로제 리조또",
+        price: 11900,
+      },
+      {
+        name: "새우 로제 리조또",
+        price: 11900,
+      },
+      {
+        name: "매콤 게살 크림 리조또",
+        price: 12900,
+      },
+      {
+        name: "베이컨 토마토 파스타",
+        price: 11900,
+      },
+      {
+        name: "미트 로제 파스타",
+        price: 11900,
+      },
+      {
+        name: "꾸우덕 카레 덮바",
+        price: 11900,
+      },
+      {
+        name: "살치살 스테이크 샐러드",
+        price: 14300,
+      },
+      {
+        name: "리코타 치즈 샐러드",
+        price: 11800,
+      },
+      {
+        name: "칠리새우 샐러드",
+        price: 11800,
+      },
+      {
+        name: "통삼겹 스테이크 샐러드",
+        price: 10800,
+      },
+      {
+        name: "케이준 치킨 샐러드",
+        price: 9800,
+      },
+      {
+        name: "버팔로 윙(4p)",
+        price: 4500,
+      },
+      {
+        name: "치킨텐더(4p)",
+        price: 4500,
+      },
+    ],
+    url: "https://naver.me/5Am9AAVh",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20220905_108/1662369711542njzOC_JPEG/KakaoTalk_Photo_2022-09-05-18-21-01.jpeg",
+    isRequest: false,
+    x: 127.03371307228585,
+    y: 37.49746423506613,
   },
   {
     name: "남도구들",
@@ -1030,8 +1094,8 @@ const stores = [
     url: "",
     thumbnail: "",
     isRequest: true,
-    x: 0,
-    y: 0,
+    x: 127.03443221986088,
+    y: 37.496325606258154,
   },
   {
     name: "바스버거",
@@ -1852,7 +1916,7 @@ const stores = [
     menus: [
       {
         name: "오늘의 메뉴",
-        price: 7000,
+        price: 8500,
       },
       {
         name: "생삼겹살",
