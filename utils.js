@@ -98,9 +98,9 @@ const sendRandomLadder = (text, say) => {
         ? tempFilteredMembers
         : tempFilteredMembers.filter(
             (member) =>
-              member !== "주디" ||
-              member !== "카이트" ||
-              member !== "히나" ||
+              member !== "주디" &&
+              member !== "카이트" &&
+              member !== "히나" &&
               member !== "노아"
           );
     const filteredMembersLength = filteredMembers.length;

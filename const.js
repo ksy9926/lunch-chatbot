@@ -2897,7 +2897,6 @@ const cafes = [{ name: "투썸플레이스", distance: 35, time: 1 }];
 
 const members = [
   "카이트",
-  "존",
   "에디",
   "노아",
   "샐리",
@@ -2905,7 +2904,6 @@ const members = [
   "주디",
   "데이브",
   "히나",
-  "폴",
 ];
 
 const 명령어 = {
