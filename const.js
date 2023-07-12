@@ -303,72 +303,6 @@ const stores = [
     y: 37.495599,
   },
   {
-    name: "기버케밥",
-    distance: 440,
-    time: 6,
-    category: "아시아",
-    foods: ["케밥"],
-    menus: [
-      {
-        name: "치킨케밥 세트",
-        price: 9900,
-      },
-      {
-        name: "텐더케밥 세트",
-        price: 10400,
-      },
-      {
-        name: "치킨텐더 샐러드",
-        price: 8400,
-      },
-      {
-        name: "리코타치즈 샐러드",
-        price: 8400,
-      },
-      {
-        name: "치킨 브리또 세트",
-        price: 11400,
-      },
-      {
-        name: "텐더 브리또 세트",
-        price: 11900,
-      },
-      {
-        name: "소불고기케밥 세트",
-        price: 10400,
-      },
-      {
-        name: "치킨케밥",
-        price: 6500,
-      },
-      {
-        name: "치킨 브리또",
-        price: 8000,
-      },
-      {
-        name: "텐더 케밥",
-        price: 6900,
-      },
-      {
-        name: "텐더 브리또",
-        price: 8400,
-      },
-      {
-        name: "소불고기 케밥",
-        price: 6900,
-      },
-      {
-        name: "코카콜라",
-        price: 2000,
-      },
-    ],
-    url: "https://ldb-phinf.pstatic.net/20230411_26/1681189318179kqxs3_JPEG/KakaoTalk_20230411_140135071_01.jpg",
-    thumbnail: "https://naver.me/GpezmGtV",
-    isRequest: false,
-    x: 127.0346517,
-    y: 37.4962507,
-  },
-  {
     name: "김남완초밥집",
     distance: 277,
     time: 4,
@@ -1052,6 +986,20 @@ const stores = [
     isRequest: false,
     x: 127.04217471931199,
     y: 37.4999129601121,
+  },
+  {
+    name: "맛과멋",
+    distance: 314,
+    time: 4,
+    category: "한식",
+    foods: ["등갈비찜"],
+    menus: [],
+    url: "https://naver.me/G9sy1wXI",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20230628_160/1687955703139ROgxT_JPEG/1687924135220.jpg",
+    isRequest: true,
+    x: 127.0356753,
+    y: 37.497811,
   },
   {
     name: "멘야유메미루",
@@ -2830,19 +2778,6 @@ const stores = [
     isRequest: false,
     x: 127.0365456,
     y: 37.5000263,
-  },
-  {
-    name: "헤이그린스",
-    distance: 0,
-    time: 0,
-    category: "",
-    foods: [""],
-    menus: [],
-    url: "",
-    thumbnail: "",
-    isRequest: true,
-    x: 0,
-    y: 0,
   },
   {
     name: "Chai797",
