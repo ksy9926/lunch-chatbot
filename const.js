@@ -2251,6 +2251,20 @@ const stores = [
     y: 0,
   },
   {
+    name: "킹케밥",
+    distance: 325,
+    time: 5,
+    category: "터키",
+    foods: ["케밥"],
+    menus: [],
+    url: "https://naver.me/F5LHRxjN",
+    thumbnail:
+      "https://ldb-phinf.pstatic.net/20220513_107/1652403137619mILVx_JPEG/indir.jpg",
+    isRequest: true,
+    x: 127.0365456,
+    y: 37.5000263,
+  },
+  {
     name: "타코벨",
     distance: 310,
     time: 5,
