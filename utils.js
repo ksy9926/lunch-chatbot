@@ -97,20 +97,10 @@ const sendRandomLadder = (text, say) => {
       groupCount === 3
         ? tempFilteredMembers
         : tempFilteredMembers.filter(
-            (member) =>
-              member !== "주디" &&
-              member !== "카이트" &&
-              member !== "히나" &&
-              member !== "노아"
+            (member) => member !== "주디" && member !== "노아"
           );
     const filteredMembersLength = filteredMembers.length;
-    const groups =
-      groupCount === 3
-        ? [[], [], []]
-        : [
-            ["주디", "카이트"],
-            ["히나", "노아"],
-          ];
+    const groups = groupCount === 3 ? [[], [], []] : [["주디"], ["노아"]];
 
     for (let i = 0; i < filteredMembersLength; i++) {
       const randomIdx = Math.floor(Math.random() * filteredMembers.length);
