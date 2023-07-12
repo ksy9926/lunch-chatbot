@@ -8,6 +8,8 @@ const {
   sendStoreList,
   sendStoreInfo,
   addStore,
+  CommandReader,
+  CommandReaderResponse,
 } = require("./utils.js");
 
 dotenv.config();
@@ -20,24 +22,31 @@ const app = new App({
 });
 
 app.event("message", async ({ event, say }) => {
-  const text = event.text;
+  const cr = CommandReader(event);
 
-  if (text.startsWith(".랜덤")) {
-    sendRandomStore(text, say);
-  } else if (text.startsWith(".사다리")) {
-    sendRandomLadder(text, say);
-  } else if (text === ".명령어" || text === ".help") {
-    say(명령어);
-  } else if (text.startsWith(".목록")) {
-    sendStoreList(text, say);
-  } else if (text.startsWith(".추가")) {
-    addStore(text, say);
-  } else {
-    const store = stores.find(({ name }) => text.startsWith(`.${name}`));
+  switch (cr.command) {
+    case CommandReaderResponse.RANDOM:
+      sendRandomStore(text, say);
+      break;
+    case CommandReaderResponse.LADDER:
+      sendRandomLadder(text, say);
+      break;
+    case CommandReaderResponse.HELP:
+      say(명령어);
+      break;
+    case CommandReaderResponse.LIST:
+      sendStoreList(text, say);
+      break;
+    case CommandReaderResponse.ADD:
+      addStore(text, say);
+      break;
+    default:
+      const store = stores.find(({ name }) => text.startsWith(`.${name}`));
 
-    if (store) {
-      sendStoreInfo(store, say);
-    }
+      if (store) {
+        sendStoreInfo(store, say);
+      }
+      break;
   }
 });
 
